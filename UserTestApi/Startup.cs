@@ -41,6 +41,11 @@ namespace UserTestApi
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+
+                app.UseCors(builder => builder
+                    .WithOrigins("http://localhost:8080")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
             }
             else
             {
@@ -51,6 +56,8 @@ namespace UserTestApi
                         return Task.CompletedTask;
                     }));
             }
+
+            app.UseFileServer();
 
             app.UseHttpsRedirection();
 

@@ -28,8 +28,8 @@ namespace UserTestApi.Business.Mappings
         }
         private void MapCheckerQuestion() 
         {
-            CreateMap<Option, CheckOption>();
-            CreateMap<Question, CheckQuestion>();
+            CreateMap<OptionEntity, CheckOption>();
+            CreateMap<QuestionEntity, CheckQuestion>();
         }
     }
 }

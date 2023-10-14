@@ -1,0 +1,10 @@
+@import 'materialize-css/sass/components/_color-variables';
+$primary-color: black;
+$secondary-color: black;
+$button-raised-background-hover: lighten($primary-color, 20%);
+
+@import 'materialize-css/sass/materialize';
+
+.nav-wrapper a:hover {
+  background-color: $button-raised-background-hover;
+}
