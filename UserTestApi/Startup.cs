@@ -13,6 +13,8 @@ namespace UserTestApi
     {
         public static void ConfigureServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddCors();
+
             services.AddControllers();
 
             services.AddEndpointsApiExplorer();
