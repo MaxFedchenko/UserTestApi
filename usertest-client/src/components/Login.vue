@@ -11,7 +11,11 @@
           :disabled="processing"
         />
       </p>
-      <button class="btn-large" v-on:click="onSubmit">Submit</button>
+      <h6 class="red-text" v-show="loginFailed">Failed to login</h6>
+      <br />
+      <button class="btn-large" v-on:click="onSubmit" :disabled="processing">
+        Submit
+      </button>
     </div>
   </div>
 </template>
@@ -20,11 +24,11 @@
 import WebApi from '../services/WebApiService'
 
 export default {
-  emits: ['login'],
   data: function () {
     return {
-      userName: 'user1',
+      userName: 'User1',
       processing: false,
+      loginFailed: false,
     }
   },
   methods: {
@@ -37,12 +41,16 @@ export default {
       this.processing = true
 
       WebApi.loginUser(this.userName)
-        .then(() => {
+        .then((token) => {
           console.log('Login completed', this.userName)
-          this.$store.commit('login', this.userName)
+          this.loginFailed = false
+          this.$store.commit('setToken', token)
           this.$router.push('/tests')
         })
-        .catch(() => console.error('Login failed'))
+        .catch(() => {
+          console.error('Login failed')
+          this.loginFailed = true
+        })
         .finally(() => (this.processing = false))
     },
   },

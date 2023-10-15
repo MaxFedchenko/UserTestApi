@@ -7,8 +7,6 @@ namespace UserTestApi.DTOs
         [Required]
         public required int TestId { get; set; }
         [Required]
-        public required string UserName { get; set; }
-        [Required]
         public required Dictionary<int, int> Answers { get; set; }
     }
 }

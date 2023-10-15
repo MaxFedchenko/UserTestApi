@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     getTests: function () {
-      WebApi.getTests(this.$store.state.userName)
+      WebApi.getTests()
         .then((tests) => {
           this.tests = tests
         })

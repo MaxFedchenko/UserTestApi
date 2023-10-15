@@ -3,12 +3,12 @@ import { createStore } from 'vuex'
 export default createStore({
   state() {
     return {
-      userName: null,
+      token: null,
     }
   },
   mutations: {
-    login(state, userName) {
-      state.userName = userName
+    setToken(state, token) {
+      state.token = token
     },
   },
 })

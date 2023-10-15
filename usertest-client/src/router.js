@@ -15,11 +15,10 @@ const router = createRouter({
   routes,
 })
 
-router.beforeEach((to, from, next) => {
-  if (!store.state.userName && to.fullPath != '/login') {
-    next('/login')
+router.beforeEach((to, from) => {
+  if (!store.state.token && to.fullPath != '/login') {
+    return '/login'
   }
-  next()
 })
 
 export default router

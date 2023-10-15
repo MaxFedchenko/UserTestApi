@@ -79,7 +79,7 @@ export default {
 
       this.processing = true
 
-      WebApi.postAnswers(this.testId, this.$store.state.userName, answers)
+      WebApi.postAnswers(this.testId, answers)
         .then((points) => {
           console.log('Test completed with the score', points)
           this.points = points

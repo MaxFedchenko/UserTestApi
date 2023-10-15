@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using UserTestApi.Business.Services;
@@ -8,6 +9,8 @@ namespace UserTestApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+    [ProducesResponseType(401)]
     public class TestController : ControllerBase
     {
         private readonly ITestService _testService;
@@ -21,9 +24,9 @@ namespace UserTestApi.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(UserTestDTO[]), 200)]
-        public async Task<IActionResult> Get([Required] string user)
+        public async Task<IActionResult> Get()
         {
-            var tests = await _testService.GetUserTests(user);
+            var tests = await _testService.GetUserTests(User.Identity!.Name!);
             return Ok(tests.Select(_mapper.Map<UserTest, UserTestDTO>));
         }
         [HttpGet("{id}")]
@@ -51,7 +54,7 @@ namespace UserTestApi.Controllers
             int points;
             try
             {
-                points = await _testService.CompleteTest(dto.UserName, dto.TestId, dto.Answers);
+                points = await _testService.CompleteTest(User.Identity!.Name!, dto.TestId, dto.Answers);
             }
             catch(TestNotFoundException)
             {
