@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OAuth;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Data;
 using System.Text;
 using System.Text.Json;
 using UserTestApi.Business.Services;
@@ -109,6 +107,8 @@ namespace UserTestApi
             app.UseAuthorization();
 
             app.UseHttpsRedirection();
+
+            app.UseFileServer();
 
             app.UseSpa(c => { });
 
